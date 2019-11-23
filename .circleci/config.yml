@@ -21,9 +21,9 @@ jobs:
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
       - save_cache:
-          key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+          key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
       - run:
           name: Rubocop
           command: bundle exec rubocop -a
@@ -49,9 +49,9 @@ jobs:
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
       - save_cache:
-          key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
             - ./vendor/bundle
+          key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
       - run: rails db:create
       - run:
           name: Rspec
