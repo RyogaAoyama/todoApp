@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.3-node-browsers-legacy
         environment:
-            RAILS_ENV: test
-            DB_HOST: 127.0.0.1
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
         environment:
           DB_USER: root
@@ -32,8 +32,8 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.3-node-browsers-legacy
         environment:
-            RAILS_ENV: test
-            DB_HOST: 127.0.0.1
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
         environment:
           DB_USER: root
