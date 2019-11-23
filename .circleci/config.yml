@@ -1,3 +1,7 @@
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
 version: 2
 jobs:
   rubocop:
@@ -10,24 +14,26 @@ jobs:
         environment:
           DB_USER: root
           DB_PASSWORD: password
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-gem-cache-{{ checksum "Gemfile.lock" }}
-          - v1-gem-cache-
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: gem install bundler
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
-
       - save_cache:
-        key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ./vendor/bundle
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      # Rubocop
       - run:
-        name: Rubocop
-        command: bundle exec rubocop -a
-  
+          name: Rubocop
+          command: bundle exec rubocop -a
+
   rspec:
     docker:
       - image: circleci/ruby:2.6.3-node-browsers-legacy
@@ -38,31 +44,33 @@ jobs:
         environment:
           DB_USER: root
           DB_PASSWORD: password
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-gem-cache-{{ checksum "Gemfile.lock" }}
-          - v1-gem-cache-
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run: gem install bundler
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
       - save_cache:
-        key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ./vendor/bundle
-      - run: rails db:create
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      # Rspec
       - run:
-        name: RSpec
-        command: bundle exec rspec
+          name: Rspec
+          command: bundle exec rspec
 
 workflows:
   version: 2
-  rubocop_and_rspec:
+  rubocop_rspec:
     jobs:
       - rubocop
       - rspec:
-        requires:
-          - rubocop
-
-
+          requires:
+            - rubocop
