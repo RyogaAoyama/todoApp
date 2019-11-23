@@ -20,15 +20,14 @@ jobs:
       - run: gem install bundler
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
-
       - save_cache:
-        key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ./vendor/bundle
+          key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
       - run:
-        name: Rubocop
-        command: bundle exec rubocop -a
-  
+          name: Rubocop
+          command: bundle exec rubocop -a
+
   rspec:
     docker:
       - image: circleci/ruby:2.6.3-node-browsers-legacy
@@ -50,21 +49,19 @@ jobs:
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
       - save_cache:
-        key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ./vendor/bundle
+          key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
       - run: rails db:create
       - run:
-        name: Rspec
-        command: bundle exec rspec
+          name: Rspec
+          command: bundle exec rspec
 
 workflows:
   version: 2
-  rubocop_and_rspec:
+  rubocop_rspec:
     jobs:
       - rubocop
       - rspec:
-        requires:
-          - rubocop
-
-
+          requires:
+            - rubocop
