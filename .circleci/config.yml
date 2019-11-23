@@ -3,13 +3,13 @@ jobs:
   rubocop:
     docker:
       - image: circleci/ruby:2.6.3-node-browsers-legacy
-      environment:
-          RAILS_ENV: test
-          DB_HOST: 127.0.0.1
+        environment:
+            RAILS_ENV: test
+            DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
-      environment:
-        DB_USER: root
-        DB_PASSWORD: password
+        environment:
+          DB_USER: root
+          DB_PASSWORD: password
     steps:
       - checkout
       - restore_cache:
@@ -24,7 +24,6 @@ jobs:
         key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
-      
       - run:
         name: Rubocop
         command: bundle exec rubocop -a
@@ -32,13 +31,13 @@ jobs:
   rspec:
     docker:
       - image: circleci/ruby:2.6.3-node-browsers-legacy
-      environment:
-          RAILS_ENV: test
-          DB_HOST: 127.0.0.1
+        environment:
+            RAILS_ENV: test
+            DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
-      environment:
-        DB_USER: root
-        DB_PASSWORD: password
+        environment:
+          DB_USER: root
+          DB_PASSWORD: password
     steps:
       - checkout
       - restore_cache:
