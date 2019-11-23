@@ -1,0 +1,69 @@
+version: 2
+jobs:
+  rubocop:
+    docker:
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
+      environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+      - image: circleci/mysql:5.7
+      environment:
+        DB_USER: root
+        DB_PASSWORD: password
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - v1-gem-cache-{{ checksum "Gemfile.lock" }}
+          - v1-gem-cache-
+      - run: gem install bundler
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
+
+      - save_cache:
+        key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+      
+      - run:
+        name: Rubocop
+        command: bundle exec rubocop -a
+  
+  rspec:
+    docker:
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
+      environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+      - image: circleci/mysql:5.7
+      environment:
+        DB_USER: root
+        DB_PASSWORD: password
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - v1-gem-cache-{{ checksum "Gemfile.lock" }}
+          - v1-gem-cache-
+      - run: gem install bundler
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
+      - save_cache:
+        key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+      - run: rails db:create
+      - run:
+        name: RSpec
+        run: bundle exec rspec
+
+workflows:
+  version: 2
+  rubocop_rspec:
+    jobs:
+      - rubocop
+      - rspec:
+        requires:
+          - rubocop
+
+
