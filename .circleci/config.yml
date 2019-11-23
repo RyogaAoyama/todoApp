@@ -14,9 +14,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-gem-cache-{{ checksum "Gemfile.lock" }}
-          - v1-gem-cache-
+          keys:
+            - v1-gem-cache-{{ checksum "Gemfile.lock" }}
+            - v1-gem-cache-
       - run: gem install bundler
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
@@ -42,9 +42,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-gem-cache-{{ checksum "Gemfile.lock" }}
-          - v1-gem-cache-
+          keys:
+            - v1-gem-cache-{{ checksum "Gemfile.lock" }}
+            - v1-gem-cache-
       - run: gem install bundler
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
