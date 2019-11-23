@@ -54,7 +54,7 @@ jobs:
       - run: rails db:create
       - run:
         name: RSpec
-        run: bundle exec rspec
+        command: bundle exec rspec
 
 workflows:
   version: 2
