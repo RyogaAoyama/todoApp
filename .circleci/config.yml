@@ -23,7 +23,7 @@ jobs:
       - save_cache:
         key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
         paths:
-          - vendor/bundle
+          - ./vendor/bundle
       - run:
         name: Rubocop
         command: bundle exec rubocop -a
@@ -50,7 +50,7 @@ jobs:
       - save_cache:
         key: v1-gem-cache-{{ checksum "Gemfile.lock" }}
         paths:
-          - vendor/bundle
+          - ./vendor/bundle
       - run: rails db:create
       - run:
         name: RSpec
@@ -58,7 +58,7 @@ jobs:
 
 workflows:
   version: 2
-  rubocop_rspec:
+  rubocop_and_rspec:
     jobs:
       - rubocop
       - rspec:
