@@ -1,6 +1,6 @@
 # Table of contents
 
-* [アプリ仕様](README.md)
+* [TodoApp](README.md)
 
 ## Todo機能 <a id="todo"></a>
 
