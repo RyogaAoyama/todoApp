@@ -4,7 +4,7 @@
 
 Vue.js Rails CircleCI Docker Rspec gitbook githubの練習
 
-いままで勉強してきたことの総復習
+いままで勉強してきたことの総復習!
 
 
 
