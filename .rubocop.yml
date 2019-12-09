@@ -3,24 +3,23 @@ Style/FrozenStringLiteralComment:
 
 Rails:
   Enabled: true
-
-  # 日本語でのコメントを許可
+# 日本語でのコメントを許可
 AsciiComments:
   Enabled: false
-
-  # 最大文字数
+# 最大文字数
 Metrics/LineLength:
   Max: 120
-
-  # 以下のファイルはブロックの文字数チェックはしない
+# 以下のファイルはブロックの文字数チェックはしない
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*'
-
-  # {}のスペースがあることをチェック
+    - "spec/**/*"
+# {}のスペースがあることをチェック
 Layout/SpaceInsideStringInterpolation:
   EnforcedStyle: space
-
-  # コンパクト形式でクラスを宣言
+# クラス定義方法はチェックしない
 ClassAndModuleChildren:
-  EnforcedStyle: compact
+  Enabled: false
+
+# クラスにコメントを残さない
+Documentation:
+  Enabled: false
