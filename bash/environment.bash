@@ -7,5 +7,5 @@ rails db:migrate
 # 初期データ作成
 rails db:seed
 
-# 各種サーバーを起動
+# 各種サーバーを起動！
 bundle exec foreman start
