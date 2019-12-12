@@ -1,25 +1,17 @@
 <template>
-  <v-app>
-    <v-btn>aaa</v-btn>
-    <div id="app">
-      <p>{{ message }}</p>
-    </div>
-  </v-app>
+  <div id="app">
+    <m-header>ToDoApp</m-header>
+    <v-container>
+      <router-view />
+    </v-container>
+  </div>
 </template>
 
 <script>
+import Header from "./packs/components/molecules/header.vue";
 export default {
-  data: function() {
-    return {
-      message: "Hello Vue!"
-    };
+  components: {
+    "m-header": Header
   }
 };
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
