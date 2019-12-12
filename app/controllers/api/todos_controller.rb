@@ -1,5 +1,5 @@
 class Api::TodosController < ApplicationController
-  before_action :current_todo, only: %i[update destroy]
+  before_action :current_todo, only: [:update, :destroy]
   # GET /todos
   def index
     @todos = Todo.order('created_at DESC')
@@ -10,7 +10,7 @@ class Api::TodosController < ApplicationController
     @todo = Todo.new(todo_params)
 
     if @todo.save
-      render :show, status: :created
+      render :show status: :created
     else
       render json: @todo.errors, status: :unprocessable_entity
     end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :todo do
-    text { '' }
-    boolean { '' }
+    text { "" }
+    boolean { "" }
   end
 end
