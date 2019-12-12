@@ -2,9 +2,9 @@ FROM ruby:2.6.3
 
 # yarnをインストール
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt-get update && apt-get install -y yarn
 
 # 作業ディレクトリを作成
 RUN mkdir /todoApp
@@ -23,4 +23,4 @@ ADD ./Gemfile.lock $ROOT/Gemfile.lock
 # gemをインストール
 RUN gem install bundler
 RUN bundle install
-ADD . ROOT
+ADD . $ROOT

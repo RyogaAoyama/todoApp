@@ -16,7 +16,7 @@ Rails Docker CircleCI Vue.js RSpec の総復習
 
 ## フロントエンド
 
-- Vue,js
+- Vue.js
 
 ## テストツール
 
