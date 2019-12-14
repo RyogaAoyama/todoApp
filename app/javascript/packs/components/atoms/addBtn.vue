@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-right">
+  <div class="bottom-right" @click="onclick">
     <v-btn fab dark large color="primary">
       <v-icon dark>add</v-icon>
     </v-btn>
@@ -7,7 +7,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    onclick() {
+      this.$emit("add");
+    }
+  }
+};
 </script>
 
 <style>

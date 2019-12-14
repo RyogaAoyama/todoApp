@@ -2,7 +2,7 @@ class Api::TodosController < ApplicationController
   before_action :current_todo, only: %i[update destroy]
   # GET /todos
   def index
-    @todos = Todo.order('created_at DESC')
+    @todos = Todo.order('created_at ASC')
   end
 
   # POST /todos
@@ -33,7 +33,10 @@ class Api::TodosController < ApplicationController
   private
 
   def todo_params
-    params.fetch(:todo, {}).permit(:name, :isDone)
+    params.fetch(:todo, {}).permit(
+      :name,
+      :is_done
+    )
   end
 
   def current_todo
