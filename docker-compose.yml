@@ -12,7 +12,10 @@ services:
     build: .
     command: bash ./bash/environment.bash
     volumes:
-      - .:/todoApp
+      - .:/todoApp:cached
+      - /todoApp/tmp
+      - /todoApp/log
+      - /todoApp/vender
     ports:
       - "3000:3000"
       - "3035:3035"
