@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt-get update && apt-get install -y yarn
 
+# yarnを最新に更新
+RUN yarn install
+
 # 作業ディレクトリを作成
 RUN mkdir /todoApp
 
