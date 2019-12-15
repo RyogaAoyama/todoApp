@@ -1,0 +1,37 @@
+<html>
+  <meta charset="UTF-8" />
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 @click="test">Vuetest</h1>
+      <test-component v-on:eee="test"></test-component>
+    </div>
+  </body>
+
+  <script>
+    const Test = Vue.component("test-component", {
+      template: "\
+      <div @click='onclick'>\
+        test\
+      </div>",
+      methods: {
+        onclick() {
+          this.$emit("eee", "component");
+        }
+      }
+    });
+    let app = new Vue({
+      el: "#app",
+      components: {
+        "test-component": Test
+      },
+      methods: {
+        test: function(e) {
+          alert(e);
+        }
+      }
+    });
+  </script>
+</html>

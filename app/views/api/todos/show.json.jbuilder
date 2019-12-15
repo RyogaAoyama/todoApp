@@ -1,3 +1,3 @@
 json.set! :todo do
-  json.extract! @task, *@task.attribute_names
+  json.extract! @todo, *@todo.attribute_names
 end

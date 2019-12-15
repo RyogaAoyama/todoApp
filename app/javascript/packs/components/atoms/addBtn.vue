@@ -1,13 +1,21 @@
 <template>
-  <div class="bottom-right">
-    <v-btn fab dark large color="primary">
-      <v-icon dark>add</v-icon>
-    </v-btn>
-  </div>
+  <transition>
+    <div class="bottom-right" @click="onclick">
+      <v-btn fab dark large color="primary">
+        <v-icon dark>add</v-icon>
+      </v-btn>
+    </div>
+  </transition>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    onclick() {
+      this.$emit("add");
+    }
+  }
+};
 </script>
 
 <style>
@@ -15,5 +23,18 @@ export default {};
   position: fixed;
   bottom: 25px;
   right: 25px;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+.v-enter-to,
+.v-leave {
+  opacity: 1;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.1s;
 }
 </style>

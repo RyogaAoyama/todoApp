@@ -2,6 +2,7 @@ import "material-design-icons-iconfont/dist/material-design-icons.css";
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/dist/vuetify.min.css";
 import Vue from "vue";
+import axios from "axios";
 import Vuetify from "vuetify";
 import App from "../app.vue";
 import router from "./router";
@@ -12,6 +13,8 @@ const vuetify = new Vuetify({
     iconfont: "mdi"
   }
 });
+
+Vue.prototype.$axios = axios;
 
 document.addEventListener("DOMContentLoaded", () => {
   new Vue({
