@@ -1,3 +1,6 @@
+# yarn最新化
+yarn install
+
 # DB作成
 rails db:create
 
