@@ -28,3 +28,7 @@ Rails Docker CircleCI Vue.js RSpec の総復習
 
 - gitbook
 - lucidchart
+
+## その他
+
+- github Desktop
