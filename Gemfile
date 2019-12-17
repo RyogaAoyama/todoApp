@@ -59,3 +59,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # 複数プロセスを起動する
 gem 'foreman'
+
+# JSで環境変数を使用するためのgem
+gem 'gon'
+gem 'dotenv-rails'

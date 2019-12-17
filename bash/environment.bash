@@ -2,13 +2,13 @@
 yarn install
 
 # DB作成
-rails db:create
+bin/rails db:create
 
 # DBマイグレーション
-rails db:migrate
+bin/rails db:migrate
 
 # 初期データ作成
-rails db:seed
+bin/rails db:seed
 
 # 各種サーバーを起動！
 bundle exec foreman start
