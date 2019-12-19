@@ -22,12 +22,11 @@
             />
           </v-list-item-content>
           <div v-if="todo.isEdit">
-            <icon-btn @click="regist(todo)" :disabled="todo.name.length < 1"
-              >mdi-check-circle-outline</icon-btn
-            >
-            <icon-btn @click="cansel(todo.id)"
-              >mdi-close-circle-outline</icon-btn
-            >
+            <icon-btn
+              @click="regist(todo)"
+              :disabled="todo.name.length < 1"
+            >mdi-check-circle-outline</icon-btn>
+            <icon-btn @click="cansel(todo.id)">mdi-close-circle-outline</icon-btn>
           </div>
           <div v-else>
             <v-menu>
@@ -40,14 +39,16 @@
               <v-list>
                 <v-subheader>メニュー</v-subheader>
                 <v-list-item @click="edit(todo.id)">
-                  <v-list-item-icon><v-icon>mdi-pen</v-icon></v-list-item-icon>
+                  <v-list-item-icon>
+                    <v-icon>mdi-pen</v-icon>
+                  </v-list-item-icon>
                   <v-list-item-content>タスクを編集</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item @click="destroy(todo.id)">
-                  <v-list-item-icon
-                    ><v-icon>mdi-delete</v-icon></v-list-item-icon
-                  >
+                  <v-list-item-icon>
+                    <v-icon>mdi-delete</v-icon>
+                  </v-list-item-icon>
                   <v-list-item-content>タスクを削除</v-list-item-content>
                 </v-list-item>
                 <v-divider inset="inset"></v-divider>
@@ -61,7 +62,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import iconBtn from "../atoms/iconBtn.vue";
+import { RepositoryFactory } from "../../factories/repositoryFactory.js";
+
+const TodosRepository = RepositoryFactory.get("todos");
 export default {
   props: ["todos"],
   computed: {
@@ -76,31 +81,10 @@ export default {
   methods: {
     async done(todo) {
       // 更新内容の保存
-      // TODO: そのうち環境変数に使用
-      const APP_URL = "http://localhost:3000";
-      await this.$axios
-        .put(APP_URL + "/api/todos/" + todo.id, {
-          todo
-        })
-        .catch(e => {
-          alert(e);
-        });
+      this.$store.dispatch("done", todo);
     },
     async create(todo) {
-      const APP_URL = "http://localhost:3000";
-      await this.$axios
-        .post(APP_URL + "/api/todos", todo)
-        .then(response => {
-          this.$set(
-            this.todos[this.todos.length - 1],
-            "id",
-            response.data.todo.id
-          );
-          this.$set(this.todos[this.todos.length - 1], "isEdit", false);
-        })
-        .catch(e => {
-          alert(e);
-        });
+      this.$store.dispatch("create", todo);
     },
     cansel(key) {
       if (key == -1) {
@@ -127,19 +111,7 @@ export default {
       });
     },
     destroy(key) {
-      const APP_URL = "http://localhost:3000";
-      this.$axios
-        .delete(APP_URL + "/api/todos/" + key)
-        .then(response => {
-          this.todos.forEach((todo, idx) => {
-            if (todo.id == key) {
-              this.todos.splice(idx, 1);
-            }
-          });
-        })
-        .catch(e => {
-          alert(e);
-        });
+      this.$store.dispatch("todoDestroy", key);
     },
     regist(todo) {
       if (todo.id == -1) {
@@ -149,19 +121,7 @@ export default {
       }
     },
     async update(todo) {
-      const APP_URL = "http://localhost:3000";
-      await this.$axios
-        .put(APP_URL + "/api/todos/" + todo.id, todo)
-        .then(response => {
-          this.todos.forEach((value, idx) => {
-            if (value.id == todo.id) {
-              this.$set(this.todos[idx], "isEdit", false);
-            }
-          });
-        })
-        .catch(e => {
-          alert(e);
-        });
+      this.$store.dispatch("todoUpdate", todo);
     }
   }
 };
