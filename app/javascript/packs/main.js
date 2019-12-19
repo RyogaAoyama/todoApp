@@ -6,6 +6,7 @@ import axios from "axios";
 import Vuetify from "vuetify";
 import App from "../app.vue";
 import router from "./router";
+import store from "./store.js";
 
 Vue.use(Vuetify, {});
 const vuetify = new Vuetify({
@@ -18,6 +19,7 @@ Vue.prototype.$axios = axios;
 
 document.addEventListener("DOMContentLoaded", () => {
   new Vue({
+    store,
     router,
     vuetify,
     render: h => h(App)
