@@ -22,16 +22,27 @@ jobs:
         with:
           ruby-version: 2.6.x
 
-      - name: mysql ports
-        run: echo ${PORT}
+      - name: mysql set up
+        run: |
+          sudo apt-get install libmysqlclient-dev
+          echo ${PORT}
         env:
           PORT: ${{job.services.mysql.ports['3306']}}
 
-      - name: Build and test with Rake
+      - name: yarn install
+        run: yarn install
+
+      - name:
+
+      - name: Build and test with rails
         run: |
-          sudo apt-get install libmysqlclient-dev
-          yarn install
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails
           echo '成功！！！！'
+
+      - name: Run rubocop
+        run: bundle exec rubocop
+
+      - name: Run rspec
+        run: bundle exec rspec
