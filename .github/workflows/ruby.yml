@@ -40,14 +40,14 @@ jobs:
         uses: actions/cache@preview
         with:
           path: vendor/bundle
-          key: ${{runner.os}}-gem-${{hasFiles('**/Gemfile.lock')}}
+          key: ${{runner.os}}-gem-${{hashFiles('**/Gemfile.lock')}}
           restore-keys: ${{runner.os}}-gem-
 
       - name: Cache node_modules
         uses: actions/cache@preview
         with:
           path: ./node_modules
-          key: ${{runner.os}}-node-${{hasFiles('**/yarn.lock')}}
+          key: ${{runner.os}}-node-${{hashFiles('**/yarn.lock')}}
           restore-keys: ${{runner.os}}-node-
 
       - name: Run rubocop
