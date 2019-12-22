@@ -50,10 +50,11 @@ jobs:
           key: ${{runner.os}}-node-${{hashFiles('**/yarn.lock')}}
           restore-keys: ${{runner.os}}-node-
 
+      - name: Create db
+        run: bundle exec rails db:create
+
       - name: Run rubocop
         run: bundle exec rubocop
 
       - name: Run rspec
-        run: |
-          bundle exec db:create
-          bundle exec rspec
+        run: bundle exec rspec
