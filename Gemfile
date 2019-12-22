@@ -61,5 +61,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'foreman'
 
 # JSで環境変数を使用するためのgem
-gem 'gon'
 gem 'dotenv-rails'
+gem 'gon'
