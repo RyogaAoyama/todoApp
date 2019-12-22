@@ -36,8 +36,19 @@ jobs:
           echo '成功！！！！'
           cp config/database.yml.ci config/database.yml
 
-      - name: db create
-        run: bundle exec rails db:create
+      - name: Cache gems
+        uses: actions/cache@preview
+        with:
+          path: vendor/bundle
+          key: ${{runner.os}}-gem-${{hasFiles('**/Gemfile.lock')}}
+          restore-keys: ${{runner.os}}-gem-
+
+      - name: Cache node_modules
+        uses: actions/cache@preview
+        with:
+          path: ./node_modules
+          key: ${{runner.os}}-node-${{hasFiles('**/yarn.lock')}}
+          restore-keys: ${{runner.os}}-node-
 
       - name: Run rubocop
         run: bundle exec rubocop
