@@ -13,7 +13,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: root
         ports:
-          - 3306
+          - "3306:3306"
 
     steps:
       - uses: actions/checkout@v1
@@ -23,11 +23,7 @@ jobs:
           ruby-version: 2.6.x
 
       - name: mysql set up
-        run: |
-          sudo apt-get install libmysqlclient-dev
-          echo ${PORT}
-        env:
-          PORT: ${{job.services.mysql.ports['3306']}}
+        run: sudo apt-get install libmysqlclient-dev
 
       - name: yarn install
         run: yarn install
