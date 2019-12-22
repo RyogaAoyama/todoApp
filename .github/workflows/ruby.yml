@@ -6,18 +6,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql
+        ports:
+          - 3306
+
     steps:
       - uses: actions/checkout@v1
       - name: Set up Ruby 2.6
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6.x
-      - name: Set up mysql5.7
-        uses: mirromutth/mysql-action@master
-        with:
-          mysql version: 5.7
-          mysql database: test
-          mysql root password: test
+
+      - name: mysql ports
+        run: echo ${PORT}
+        env:
+          PORT: ${{job.services.mysql.ports['3306']}}
+
       - name: Build and test with Rake
         run: |
           gem install bundler
