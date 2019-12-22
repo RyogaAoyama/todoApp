@@ -12,9 +12,14 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6.x
+      - name: Set up mysql5.7
+        uses: mirromutth/mysql-action@master
+        with:
+          mysql version: 5.7
+          mysql database: test
+          mysql root password: test
       - name: Build and test with Rake
         run: |
-          openssl version
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rake
