@@ -68,6 +68,6 @@ jobs:
       - name: Deploy
         run:
           cd .ssh &&
-          ssh -i ci_rsa_key ${{secrets.USER_NAME}}@${{HOST_NAME}} &&
+          ssh -i ci_rsa_key ${{secrets.USER_NAME}}@${{secrets.HOST_NAME}} &&
           cd ${{secrets.APP_DIR_PATH}} &&
           #git pull
