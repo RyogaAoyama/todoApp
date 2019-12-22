@@ -55,5 +55,5 @@ jobs:
 
       - name: Run rspec
         run: |
-        bundle exec db:create
-        bundle exec rspec
+          bundle exec db:create
+          bundle exec rspec
