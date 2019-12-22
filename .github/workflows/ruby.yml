@@ -35,7 +35,7 @@ jobs:
           bundle exec rails
           echo '成功！！！！'
 
-        - name: db create
+      - name: db create
         run: bundle exec rails db:create
 
       - name: Run rubocop
