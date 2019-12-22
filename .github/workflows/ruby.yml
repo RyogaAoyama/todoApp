@@ -9,7 +9,6 @@ jobs:
     services:
       db:
         image: mysql:5.7
-        hostname: db
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: root
