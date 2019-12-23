@@ -19,7 +19,7 @@ jobs:
           echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
 
       - name: Deploy
-        run:
+        run: |
           cd
           ssh -i ci_rsa_key ${{secrets.USER_NAME}}@${{secrets.HOST_NAME}}
           cd ${{secrets.APP_DIR_PATH}}
