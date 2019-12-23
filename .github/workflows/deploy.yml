@@ -17,6 +17,7 @@ jobs:
           cd
           sudo mkdir -p .ssh 
           cd .ssh
+          ls -l
           sudo touch ci_rsa_key
           sudo echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
 
