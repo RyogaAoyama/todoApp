@@ -1,0 +1,25 @@
+on:
+  push:
+    branches:
+      - master
+
+name: EC2にデプロイ
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up ssh
+        run: |
+          sudo mkdir -p /.ssh
+          cd .ssh
+          echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
+
+      - name: Deploy
+        run:
+          cd .ssh &&
+          ssh -i ci_rsa_key ${{secrets.USER_NAME}}@${{secrets.HOST_NAME}} &&
+          cd ${{secrets.APP_DIR_PATH}} &&
+          #git pull
