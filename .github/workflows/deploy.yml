@@ -15,8 +15,8 @@ jobs:
       - name: Set up ssh
         run: |
           cd
-          sudo touch ci_rsa_key
-          sudo echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
+          touch ci_rsa_key
+          echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
 
       - name: Deploy
         run:
