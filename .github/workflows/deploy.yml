@@ -22,5 +22,6 @@ jobs:
         run:
           cd
           ssh -i ci_rsa_key ${{secrets.USER_NAME}}@${{secrets.HOST_NAME}} &&
-          cd ${{secrets.APP_DIR_PATH}}
+          cd /var && cd www && cd app && cd todoApp
+          #cd ${{secrets.APP_DIR_PATH}}
           #git pull
