@@ -1,26 +1,26 @@
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
 
-name: EC2にデプロイ
+# name: EC2にデプロイ
 
-jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     name: Deploy
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up ssh
-        run: |
-          cd
-          touch ci_rsa_key
-          echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
+#     steps:
+#       - uses: actions/checkout@v1
+#       - name: Set up ssh
+#         run: |
+#           cd
+#           touch ci_rsa_key
+#           echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
 
-      - name: Deploy
-        run: |
-          cd
-          ssh -i -t -t ci_rsa_key ${{secrets.USER_NAME}}@${{secrets.HOST_NAME}}
-          cd ${{secrets.APP_DIR_PATH}}
-          #git pull
+#       - name: Deploy
+#         run: |
+#           cd
+#           ssh -i -t -t ci_rsa_key ${{secrets.USER_NAME}}@${{secrets.HOST_NAME}}
+#           cd ${{secrets.APP_DIR_PATH}}
+#           git pull
