@@ -17,7 +17,7 @@ jobs:
           cd
           sudo mkdir -p .ssh 
           cd .ssh
-          sudo echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
+          echo ${{secrets.SSH_SECRET_KEY}} >> sudo ci_rsa_key
 
       - name: Deploy
         run:
