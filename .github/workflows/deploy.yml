@@ -15,15 +15,12 @@ jobs:
       - name: Set up ssh
         run: |
           cd
-          sudo mkdir -p .ssh 
-          cd .ssh
-          ls -l
           sudo touch ci_rsa_key
           sudo echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
 
       - name: Deploy
         run:
-          cd .ssh &&
+          cd
           ssh -i ci_rsa_key ${{secrets.USER_NAME}}@${{secrets.HOST_NAME}} &&
-          cd ${{secrets.APP_DIR_PATH}} &&
+          cd ${{secrets.APP_DIR_PATH}}
           #git pull
