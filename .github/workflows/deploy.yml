@@ -13,9 +13,9 @@ jobs:
     steps:
       - name: Set up ssh
         run: |
-          cd &&
-          sudo mkdir -p .ssh &&
-          cd .ssh &&
+          cd /
+          sudo mkdir -p .ssh 
+          cd .ssh 
           echo ${{secrets.SSH_SECRET_KEY}} >> ci_rsa_key
 
       - name: Deploy
