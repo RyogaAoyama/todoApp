@@ -35,7 +35,7 @@ jobs:
           bundle exec rails
           echo '成功！！！！'
           cp config/database.yml.ci config/database.yml
-    steps:
+
       - name: Cache gems
         uses: actions/cache@preview
         with:
